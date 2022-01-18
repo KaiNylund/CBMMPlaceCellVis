@@ -1,0 +1,212 @@
+body {
+  font-family: "Domine", serif;
+  font-size: 1.5rem;
+  margin: 0 7%;
+}
+
+section {
+  padding: 0 8%;
+  margin-top: 5%;
+}
+
+svg text{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+h1, h2 {
+  font-family: "Merriweather", serif;
+}
+
+h1 {
+  font-size: 3rem;
+  font-family: "Merriweather", serif;
+  margin-bottom: 1rem;
+  margin-top: 5%;
+}
+
+h2 {
+  font-size: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  border-top: 1px solid #ccc;
+  margin-top: 15%;
+  margin-bottom: 2%;
+  text-align: right;
+  font-size: 12px;
+}
+.footer a {
+  color: #21346B;
+}
+
+.footer a:hover {
+  color: #ce3333;
+}
+
+.slider-container {
+  margin: 0 auto;
+  width: 97%;
+}
+
+.s1, .s2, .s3, .s4 {
+  border-width: 7px;
+  border-style: none solid none solid;
+}
+
+.s1 {
+  border-color: #0f5b388f;
+}
+
+.s2 {
+  border-color: #162c578f;
+}
+
+.s3 {
+  border-color: #835d168f;
+}
+
+.s4 {
+  border-color: #8332168f;
+}
+
+.c1 {
+  color: #0f5b37;
+}
+
+.c2 {
+  color: #162c57;
+}
+
+.c3 {
+  color: #835d16;
+}
+
+.c4 {
+  color: #833216;
+}
+
+#title a {
+  color: #492a7c;
+  text-decoration: none;
+}
+
+#title p {
+  font-size: 1.5rem;
+}
+
+#num-cells-container {
+  display: flex;
+  align-items: center;
+}
+
+#num-cells-container > output {
+  width: 1rem;
+  margin: 1rem;
+}
+
+#num-cells {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  height: 10px; /* Specified height */
+  background: #ffffff;
+  opacity: 0.7;
+  border: #2e2e2e 2px solid;
+  transition: background 0.3s;
+  margin: 1rem;
+  flex-grow: 100;
+}
+
+/* The slider itself */
+#ms-1, #ms-2, #ms-3 {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%;
+  height: 50px; /* Specified height */
+  background: #ffffff;
+  opacity: 0.7;
+  border: #21346B 1px solid;
+  transition: background 0.3s;
+}
+
+/* Mouse-over effects */
+#ms-1:hover, #ms-2:hover, #ms-2:hover {
+  background: #ebebeb;
+}
+
+#num-cells:hover {
+  
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+#ms-1::-webkit-slider-thumb, #ms-2::-webkit-slider-thumb, #ms-3::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 100px; /* Set a specific slider handle width */
+  height: 100px; /* Slider handle height */
+  background-image: url("./img/mouse_clipart.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer; /* Cursor on hover */
+  transform: scaleX(-1);
+}
+
+#ms-1::-moz-range-thumb, #ms-2::-moz-range-thumb, #ms-3::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background-image: url("./img/mouse_clipart.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer; /* Cursor on hover */
+  transform: scaleX(-1);
+}
+
+#num-cells::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  background: red;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+#num-cells::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 15px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+
+#strip-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+#bars-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#bars-container > * {
+  max-width: 45%;
+  min-width: 300px;
+  margin: 0.5rem;
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html xml:lang="en" lang="en">
+<head>
+  <!-- Imports -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Domine">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="plot_cells.js"></script>
+  <title>CSE442 | FP</title>
+</head>
+<body>
+<div class="content">
+  <section id="title">
+    <h1>
+      <a href="/">
+        <span class="c1">Moving</span>
+        <span class="c2">Place</span>
+        <span class="c3">Cells</span>
+      </a>
+    </h1>
+  </section>
+
+  <section class="s1">
+    <h2>Introduction</h2>
+    <p>
+      Place cells are neurons in the hippocampus that react when an animal is in a specific spot
+      in its environment. How do these cells act in a moving animal, and what kinds of areas do
+      they cover?
+    </p>
+  </section>
+
+  <section class="s2">
+    <h2>Simple experiment</h2>
+    <p>
+      We have a rat on a 3.5m long track and are recording from 4 of its hippocampal neurons
+      as it moves. These neurons are color coded and simulated from actual place cells recorded
+      in the Wilson lab at MIT. Each time a cell spikes, we'll add a tick with its corresponding
+      color on the strip plot at the rat's position.
+      <br><br>
+      <span class="center">(drag the rat to get started)</span>
+    </p>
+    <div class="slider-container">
+      <input type="range" id="ms-1" min="0" max="3.5" value="1.75" step="any">
+    </div>
+    <div id="strip-container">
+      <svg class="cell-strip"></svg>
+    </div>
+    <p>
+      What can you observe about where and how frequently different cells are spiking? To visualize
+      these behaviors, let's plot the same spikes over four histograms:
+    </p>
+    <div id="bars-container">
+      <svg class="cell1-bars"></svg>
+      <svg class="cell2-bars"></svg>
+      <svg class="cell3-bars"></svg>
+      <svg class="cell4-bars"></svg>
+    </div>
+    <p>
+      It's clear that these four cells spike based on some distribution around a preferred area!
+      But can place cells account for all of the rat's movement, or just these distributions?
+    </p>
+  </section>
+
+  <section class="s3">
+    <h2>Estimating position</h2>
+    <p>
+      To answer the previous question, let's repeat the same experiment and try to predict the
+      rat's movement from the spiking behavior of its place cells. If the prediction is accurate,
+      it implies that place cells can explain all of the rat's movement (at least on this simple 
+      track).
+    </p>
+    <p>
+      For our estimations, we'll use a maximum likelihood approach based on all the spikes that
+      occurred in the last half-second and their cells' average firing rate at each position bin.
+      We verify these predictions by plotting them against the rat's movement below:
+    </p>
+    <div class="slider-container">
+      <input type="range" id="ms-2" min="0" max="3.5" value="1.75" step="any">
+    </div>
+    <br>
+    <div>
+      <svg class="rat-pos"></svg>
+    </div>
+    <p>
+      Were the predictions accurate? If not, where did they fail? What happens if we increase
+      or decrease the number of cells we're considering for our predictions?
+    </p>
+    <div id="num-cells-container">
+      <label for="num-cells"> Number of Cells: </label>
+      <output for="num-cells">4</output>
+      <input type="range" id="num-cells" name="num-cells" min="1" max="50" value="4" step="1" oninput="this.previousElementSibling.value = this.value">
+    </div>
+  </section>
+
+  <section class="s4">
+    <h2>Appendix</h2>
+    <p> 
+      All place field spiking data was collected by Hector Penagos in Matt Wilson's lab and made 
+      available by the 
+      <a href=https://cbmm.mit.edu/learning-hub/tools-datasets/decoding-hippocampal-place-cell-data target="_blank">
+      Center for Brains, Minds, and Machines</a> (CBMM). Analyses are drawn from Daniel Zysman and
+      Ellen Hildreth's MATLAB live script.
+    </p>
+    <p>
+      Spikes are simulated from a list of average spike rates at each position bin according to
+      a Poisson Process. For more details about Poisson spiking, see this 
+      <a href=https://www.cns.nyu.edu/~david/handouts/poisson.pdf target="_blank">handout</a> by
+      professor David Heeger.
+    </p>
+    <p>
+      Let \(x_i\) indicate that the rat is in position \(i\).<br> 
+      Let \(s_1, \dots, s_n\) be the number of spikes from each of the \(n\) cells.<br> 
+      Let \(f(k;\lambda) = \frac{\lambda^k e^{-\lambda}}{k!}\) be the Poisson PMF.<br><br>
+
+      Using an MLE approach, our prediction for the rat's position is
+      \(\max_i\{L(x_i | s_1, \dots, s_n)\}\).
+
+      We can compute the likelihood that the rat is in position \(i\) as follows:
+      \begin{flalign*}
+        L(x_i | s_1, \dots, s_n) &= \mathbb{P}(s_1, \dots, s_n | x_1) \\
+        & = \mathbb{P}(s_1 | x_i)\mathbb{P}(s_2 | x_i)\dots \mathbb{P}(s_n | x_i) \\
+        & = f(s_1;\text{expected # of spikes at } x_i)\dots \\ & ~~~~~f(s_n;\text{expected # of spikes at } x_i)
+      \end{flalign*}
+      For more details, see Daniel Zysman and Ellen Hildreth's MATLAB live script at the 
+      <a href=https://cbmm.mit.edu/learning-hub/tools-datasets/decoding-hippocampal-place-cell-data target="_blank">
+        CBMM</a>.
+    </p>
+  </section>
+
+  <div class="footer">
+    <a href="https://courses.cs.washington.edu/courses/cse442/21au/">CSE 442 Data Visualization</a>
+    <a href="http://www.washington.edu">University of Washington</a>
+  </div>
+ </div>
+</body>
+</html>
