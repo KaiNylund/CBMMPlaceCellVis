@@ -1,9 +1,8 @@
 
-# FP-Moving-Place-Cells
-Team members:  
-*Kai Nylund
+# Simple Place Cell Experiment
+Made by Kai Nylund using D3.js
 
-Project page: https://cse442-21f.github.io/FP-Moving-Place-Cells/  
+Project page: https://KaiNylund.github.io/SimplePlaceCellExperiment/
 
 References:
 
