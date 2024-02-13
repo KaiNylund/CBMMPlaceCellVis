@@ -1,6 +1,6 @@
 
 # Simple Place Cell Experiment
-Made by Kai Nylund using D3.js
+Made using D3.js
 
 Project page: https://KaiNylund.github.io/CBMMPlaceCellVis/
 
